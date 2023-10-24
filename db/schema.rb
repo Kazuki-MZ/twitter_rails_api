@@ -51,9 +51,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_030551) do
 
   create_table "tweets", force: :cascade do |t|
     t.string "text", null: false
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
