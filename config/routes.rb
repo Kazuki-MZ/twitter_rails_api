@@ -7,7 +7,7 @@ Rails.application.routes.draw do
         registrations: 'api/v1/auth/registrations'
       }
 
-      resources :tweets, only: %i[index create]
+      resources :tweets, only: %i[index show create]
       resources :tweet_images, path: 'images', only: %i[create]
     end
   end

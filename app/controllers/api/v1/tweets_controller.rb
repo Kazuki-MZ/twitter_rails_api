@@ -13,6 +13,11 @@ module Api
         render json: { tweets: tweets.as_json(include: :user, methods: :image_url), total_count: }
       end
 
+      def show
+        tweet = Tweet.find(params[:id])
+        render json: { tweet: tweet.as_json(include: :user, methods: :image_url) }
+      end
+
       def create
         tweet = current_api_v1_user.tweets.build(tweet_params)
         tweet.tweet_image = @tweet_image if @tweet_image.present?
