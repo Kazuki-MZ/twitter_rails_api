@@ -7,4 +7,8 @@ class Tweet < ApplicationRecord
   has_one :tweet_image, dependent: :destroy
 
   validates :text, presence: true
+
+  def image_url
+    tweet_image&.image&.attached? ? url_for(tweet_image.image) : nil
+  end
 end
