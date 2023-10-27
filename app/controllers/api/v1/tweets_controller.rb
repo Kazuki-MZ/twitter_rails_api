@@ -9,8 +9,8 @@ module Api
 
       def index
         tweets = Tweet.all.order(created_at: 'DESC').includes(%i[user tweet_image]).limit(5).offset(@offset_params)
-        total_tweets_count = Tweet.all.count.to_i
-        render json: { tweets: tweets.as_json(include: :user, methods: :image_url), total_count: total_tweets_count }
+        total_count = Tweet.all.count.to_i
+        render json: { tweets: tweets.as_json(include: :user, methods: :image_url), total_count: }
       end
 
       def create
