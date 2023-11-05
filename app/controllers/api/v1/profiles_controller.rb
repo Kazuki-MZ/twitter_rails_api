@@ -4,7 +4,7 @@ module Api
   module V1
     class ProfilesController < ApplicationController
       before_action :authenticate_api_v1_user!
-      before_action :profile_info, only: [:update]
+      before_action :set_profile, only: [:update]
 
       def update
         if @profile.update(profile_params)
@@ -16,7 +16,7 @@ module Api
 
       private
 
-      def profile_info
+      def set_profile
         @profile = Profile.find_by(user_id: current_api_v1_user.id)
       end
 
