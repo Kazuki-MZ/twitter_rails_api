@@ -6,6 +6,7 @@ module Api
       before_action :authenticate_api_v1_user!
       before_action :tweet_image, only: [:create]
       before_action :offset_param, only: [:index]
+      before_action :set_tweet, only: [:destroy]
 
       def index
         tweets = Tweet.all.order(created_at: 'DESC').includes(%i[user tweet_image]).limit(5).offset(@offset_params)
@@ -30,6 +31,14 @@ module Api
         end
       end
 
+      def destroy
+        if @tweet.destroy
+          render json: @tweet
+        else
+          render json: @tweet.errors, status: :unprocessable_entity
+        end
+      end
+
       private
 
       def tweet_image
@@ -42,6 +51,10 @@ module Api
 
       def offset_param
         @offset_params = params[:offset]&.to_i
+      end
+
+      def set_tweet
+        @tweet = Tweet.find(params[:id])
       end
     end
   end
