@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       end
 
       resources :users, only: %i[show]
-      resources :tweets, only: %i[index show create]
+      resources :tweets, only: %i[index show create destroy]
       resources :tweet_images, path: 'images', only: %i[create]
       resource :profile, only: %i[update]
     end
