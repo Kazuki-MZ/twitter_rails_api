@@ -8,4 +8,5 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
   has_many :tweets, dependent: :destroy
   has_one :profile, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end
