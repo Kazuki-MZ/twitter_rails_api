@@ -25,7 +25,8 @@ module Api
         tweet = current_api_v1_user.tweets.build(tweet_params)
         tweet.tweet_image = @tweet_image if @tweet_image.present?
         if tweet.save
-          render json: tweet
+          render json: { tweet: tweet.as_json(methods: :image_url, include: { user:
+          { include: { profile: { methods: :icon_image_url } } } }) }
         else
           render status: :unprocessable_entity, json: { error: '不正な入力値です' }
         end
